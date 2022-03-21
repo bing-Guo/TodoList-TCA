@@ -1,3 +1,5 @@
+import ComposableArchitecture
+
 /**
  A type that describes the data your feature needs to perform its logic and render its UI.
  
@@ -6,5 +8,9 @@
  In order for the view store to know how to deduplicate emissions of state, we should make our state structs `Equatable`.
  */
 struct AppState: Equatable {
-    var todos: [Todo]
+    /**
+     If use Array<Todo>, it will show the warning `'forEach(state:action:environment:breakpointOnNil:file:line:)' is deprecated: Use the 'IdentifiedArray'-based version, instead`
+     The solution is here: https://tagmerge.com/issue/pointfreeco/swift-composable-architecture/854
+     */
+    var todos: IdentifiedArrayOf<Todo>
 }

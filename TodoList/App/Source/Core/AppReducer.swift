@@ -7,7 +7,7 @@ let appReducer = Reducer<AppState, AppAction, AppEnvironment>.combine(
     // todo
     todoReducer.forEach(
         state: \AppState.todos,
-        action: /AppAction.todo(index:action:),
+        action: /AppAction.todo(id:action:),
         environment: { _ in TodoEnvironment() }
     ),
     // other
@@ -16,7 +16,7 @@ let appReducer = Reducer<AppState, AppAction, AppEnvironment>.combine(
         case .addButtonTapped:
             state.todos.insert(Todo(id: UUID()), at: 0)
             return .none
-        case .todo(index: let index, action: let action):
+        case .todo(id: let id, action: let action):
             return .none
         }
     }

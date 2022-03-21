@@ -5,5 +5,5 @@
  */
 enum AppAction {
     case addButtonTapped
-    case todo(index: Int, action: TodoAction)
+    case todo(id: Todo.ID, action: TodoAction)
 }

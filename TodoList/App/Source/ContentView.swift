@@ -14,7 +14,7 @@ struct ContentView: View {
                     ForEachStore(
                         self.store.scope(
                             state: \.todos,
-                            action: AppAction.todo(index:action:)
+                            action: AppAction.todo(id:action:)
                         ),
                         content: TodoView.init(store:)
                     )
