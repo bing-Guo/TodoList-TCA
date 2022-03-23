@@ -24,9 +24,27 @@ let appReducer = Reducer<AppState, AppAction, AppEnvironment>.combine(
     Reducer { state, action, environment in
         switch action {
         case .addButtonTapped:
-            state.todos.insert(Todo(id: UUID()), at: 0)
+            state.todos.insert(Todo(id: environment.uuid()), at: 0)
             return .none
+            /// Capture TodoAction.checkboxTapped
+        case .todo(id: _, action: .checkboxTapped):
+            /// local and unique
+            struct CancelDelayId: Hashable {}
+            
+            return Effect(value: .todoDelayCompleted)
+                .debounce(
+                    id: CancelDelayId(),
+                    for: 1,
+                    scheduler: environment.mainQueue
+                )
+            
         case .todo(id: let id, action: let action):
+            /// ignore todo actions.
+            return .none
+            
+        case .todoDelayCompleted:
+            /// Use IdentifiedArrayOf.sort() to sort todos according isCompleted.
+            state.todos.sort { $1.isComplete && !$0.isComplete }
             return .none
         }
     }

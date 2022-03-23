@@ -44,7 +44,10 @@ struct ContentView_Previews: PreviewProvider {
                     ]
                 ),
                 reducer: appReducer,
-                environment: AppEnvironment()
+                environment: AppEnvironment(
+                    uuid: UUID.init,
+                    mainQueue: .main
+                )
             )
         )
     }
