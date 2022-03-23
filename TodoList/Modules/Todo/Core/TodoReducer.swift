@@ -9,4 +9,4 @@ let todoReducer = Reducer<Todo, TodoAction, TodoEnvironment> { state, action, en
         state.description = text
         return .none
     }
-}.debug()
+}.debug() // Prints debug messages describing all received actions and state mutations.

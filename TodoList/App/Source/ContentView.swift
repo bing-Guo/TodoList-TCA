@@ -7,9 +7,13 @@ struct ContentView: View {
      */
     let store: Store<AppState, AppAction>
     
+    /**
+     `scope`
+     Use `scope` to expose local state and actions when passing the store to subviews. In this way, you can limit the states that each page can access.
+     */
     var body: some View {
         NavigationView {
-            WithViewStore(self.store) { viewStore in
+            WithViewStore(self.store) { viewStore in // ViewStore<AppState, AppAction>
                 List {
                     ForEachStore(
                         self.store.scope(
